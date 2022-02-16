@@ -1,4 +1,4 @@
-package sada.sadamall.oauth.token;
+package sada.sadamall;
 
 import java.security.SecureRandom;
 import java.util.Locale;
