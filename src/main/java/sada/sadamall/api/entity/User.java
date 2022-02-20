@@ -14,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Getter @Setter
@@ -80,5 +81,35 @@ public class User {
         this.roleType = roleType;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return isEmailVerified() == user.isEmailVerified() && Objects.equals(getId(), user.getId()) && Objects.equals(getOauthId(), user.getOauthId()) && Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getProfileImageUrl(), user.getProfileImageUrl()) && getProviderType() == user.getProviderType() && getRoleType() == user.getRoleType() && Objects.equals(getCreatedAt(), user.getCreatedAt()) && Objects.equals(getModifiedAt(), user.getModifiedAt());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getOauthId(), getUsername(), getPassword(), getEmail(), isEmailVerified(), getProfileImageUrl(), getProviderType(), getRoleType(), getCreatedAt(), getModifiedAt());
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", oauthId='" + oauthId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", isEmailVerified=" + isEmailVerified +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", providerType=" + providerType +
+                ", roleType=" + roleType +
+                ", createdAt=" + createdAt +
+                ", modifiedAt=" + modifiedAt +
+                '}';
     }
 }
