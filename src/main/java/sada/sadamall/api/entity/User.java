@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Getter @Setter
+@Getter
 @NoArgsConstructor
 @Table(name = "TB_USER")
 public class User {
@@ -81,6 +81,14 @@ public class User {
         this.roleType = roleType;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
+    }
+
+    public void updateUsername(String username) {
+        this.username = username;
+    }
+
+    public void updateProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     @Override
