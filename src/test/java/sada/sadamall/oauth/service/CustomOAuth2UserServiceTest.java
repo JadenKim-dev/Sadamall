@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
-import sada.sadamall.api.entity.User;
+import sada.sadamall.api.entity.user.User;
 import sada.sadamall.api.repository.user.UserRepository;
 import sada.sadamall.oauth.entity.ProviderType;
 import sada.sadamall.oauth.entity.RoleType;

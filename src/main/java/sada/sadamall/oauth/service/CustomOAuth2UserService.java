@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
-import sada.sadamall.api.entity.User;
+import sada.sadamall.api.entity.user.User;
 import sada.sadamall.api.repository.user.UserRepository;
 import sada.sadamall.oauth.entity.ProviderType;
 import sada.sadamall.oauth.entity.RoleType;

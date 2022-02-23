@@ -2,7 +2,7 @@ package sada.sadamall.api.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sada.sadamall.api.entity.UserRefreshToken;
+import sada.sadamall.api.entity.user.UserRefreshToken;
 
 @Repository
 public interface UserRefreshTokenRepository extends JpaRepository<UserRefreshToken, Long> {

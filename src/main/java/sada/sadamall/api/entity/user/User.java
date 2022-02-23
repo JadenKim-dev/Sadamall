@@ -1,4 +1,4 @@
-package sada.sadamall.api.entity;
+package sada.sadamall.api.entity.user;
 
 import lombok.Builder;
 import lombok.Getter;

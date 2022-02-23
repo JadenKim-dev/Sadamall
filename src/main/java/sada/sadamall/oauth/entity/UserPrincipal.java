@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import sada.sadamall.api.entity.User;
+import sada.sadamall.api.entity.user.User;
 
 import java.util.Collection;
 import java.util.Collections;
