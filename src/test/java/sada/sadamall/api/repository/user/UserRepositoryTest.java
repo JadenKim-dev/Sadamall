@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
-import sada.sadamall.api.entity.User;
+import sada.sadamall.api.entity.user.User;
 import sada.sadamall.oauth.entity.ProviderType;
 import sada.sadamall.oauth.entity.RoleType;
 

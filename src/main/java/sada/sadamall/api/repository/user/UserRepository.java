@@ -2,7 +2,7 @@ package sada.sadamall.api.repository.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sada.sadamall.api.entity.User;
+import sada.sadamall.api.entity.user.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {

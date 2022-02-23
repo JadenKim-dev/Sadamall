@@ -10,12 +10,13 @@ import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import sada.sadamall.api.entity.User;
+import sada.sadamall.api.entity.user.User;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
+@Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
@@ -27,16 +28,6 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
     private Map<String, Object> attributes;
 
     @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @Override
     public String getName() {
         return oauthId;
     }
@@ -44,11 +35,6 @@ public class UserPrincipal implements OAuth2User, UserDetails, OidcUser {
     @Override
     public String getUsername() {
         return oauthId;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     @Override
