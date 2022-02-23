@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Objects;
 
-@Getter @Builder
-@NoArgsConstructor @AllArgsConstructor
+@Getter
+@NoArgsConstructor
 @Entity
 public class UserRefreshToken {
     @JsonIgnore
@@ -25,7 +25,7 @@ public class UserRefreshToken {
     @NotNull
     @Size(max = 256)
     private String refreshToken;
-// @NotNull @Size(max = 64)@NotNull @Size(max = 256)
+
     public static UserRefreshToken of(String oauthId, String refreshToken) {
         return new UserRefreshToken(oauthId, refreshToken);
 
@@ -33,6 +33,10 @@ public class UserRefreshToken {
 
     private UserRefreshToken(String oauthId, String refreshToken) {
         this.oauthId = oauthId;
+        this.refreshToken = refreshToken;
+    }
+
+    public void updateRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 
