@@ -15,7 +15,6 @@ import sada.sadamall.oauth.exception.TokenValidFailedException;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,9 +32,9 @@ public class AuthTokenProviderTest {
     }
 
     @Test
-    public void testCreateAuthTokenWithoutRole() {
+    public void createAuthTokenWithoutRole() {
         long nowTime = new Date().getTime();
-        AuthToken token = authTokenProvider.createAuthTokenWithoutRole(
+        AuthToken token = authTokenProvider.createAuthToken(
                 "1",
                 new Date(nowTime + 100000)
         );
@@ -46,9 +45,9 @@ public class AuthTokenProviderTest {
     }
 
     @Test
-    public void testCreateAuthTokenWithRole() {
+    public void createAuthTokenWithRole() {
         long nowTime = new Date().getTime();
-        AuthToken token = authTokenProvider.createAuthTokenWithRole(
+        AuthToken token = authTokenProvider.createAuthToken(
                 "1",
                 "ROLE_USER",
                 new Date(nowTime + 100000)
@@ -61,9 +60,9 @@ public class AuthTokenProviderTest {
     }
 
     @Test
-    public void testGetAuthentication() {
+    public void getAuthentication() {
         long nowTime = new Date().getTime();
-        AuthToken authToken = authTokenProvider.createAuthTokenWithRole(
+        AuthToken authToken = authTokenProvider.createAuthToken(
                 "1",
                 RoleType.USER.getCode(),
                 new Date(nowTime + 100000)
@@ -82,9 +81,9 @@ public class AuthTokenProviderTest {
     }
 
     @Test
-    public void testGetAuthentication_만료된_토큰() {
+    public void getAuthentication_만료된_토큰() {
         long nowTime = new Date().getTime();
-        AuthToken authToken = authTokenProvider.createAuthTokenWithRole(
+        AuthToken authToken = authTokenProvider.createAuthToken(
                 "1",
                 RoleType.USER.getCode(),
                 new Date(nowTime - 100000)
