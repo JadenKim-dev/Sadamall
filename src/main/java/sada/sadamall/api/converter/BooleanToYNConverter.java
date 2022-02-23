@@ -1,4 +1,4 @@
-package sada.sadamall.util.converter;
+package sada.sadamall.api.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

@@ -3,11 +3,10 @@ package sada.sadamall.api.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 import sada.sadamall.oauth.entity.ProviderType;
 import sada.sadamall.oauth.entity.RoleType;
-import sada.sadamall.util.converter.BooleanToYNConverter;
+import sada.sadamall.api.converter.BooleanToYNConverter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
