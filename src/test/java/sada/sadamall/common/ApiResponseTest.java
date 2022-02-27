@@ -46,6 +46,17 @@ public class ApiResponseTest {
     }
 
     @Test
+    public void invalidRefreshToken() throws Exception {
+        ApiResponse<String> apiResponse = ApiResponse.invalidRefreshToken();
+        ApiResponseHeader header = apiResponse.getHeader();
+        Map<String, String> body = apiResponse.getBody();
+
+        assertThat(header.getCode()).isEqualTo(ApiResponse.FAILED);
+        assertThat(header.getMessage()).isEqualTo(ApiResponse.INVALID_REFRESH_TOKEN_MESSAGE);
+        assertThat(body).isEqualTo(null);
+    }
+
+    @Test
     public void notExpiredTokenYet() {
         ApiResponse<String> apiResponse = ApiResponse.notExpiredTokenYet();
         ApiResponseHeader header = apiResponse.getHeader();

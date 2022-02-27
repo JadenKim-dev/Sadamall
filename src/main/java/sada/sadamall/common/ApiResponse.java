@@ -46,6 +46,13 @@ public class ApiResponse<T> {
         );
     }
 
+    public static <T> ApiResponse<T> invalidRefreshToken() {
+        return new ApiResponse<>(
+                new ApiResponseHeader(FAILED, INVALID_REFRESH_TOKEN_MESSAGE),
+                null
+        );
+    }
+
     public static <T> ApiResponse<T> notExpiredTokenYet() {
         return new ApiResponse<>(
                 new ApiResponseHeader(FAILED, NOT_EXPIRED_TOKEN_YET_MESSAGE),
