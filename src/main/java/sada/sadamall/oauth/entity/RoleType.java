@@ -14,4 +14,11 @@ public enum RoleType {
 
     private final String code;
     private final String displayName;
+
+    public static RoleType of(String code) {
+        return Arrays.stream(RoleType.values())
+                .filter(r -> r.getCode().equals(code))
+                .findAny()
+                .orElse(GUEST);
+    }
 }
