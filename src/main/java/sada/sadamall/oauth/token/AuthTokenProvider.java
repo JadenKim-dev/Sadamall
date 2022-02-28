@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import sada.sadamall.oauth.exception.TokenValidFailedException;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Collection;
 import java.util.Date;
@@ -33,6 +32,10 @@ public class AuthTokenProvider {
 
     public AuthToken createAuthToken(String id, String role, Date expiry) {
         return new AuthToken(id, role, expiry, key);
+    }
+
+    public AuthToken convertAuthTokenFrom(String token) {
+        return new AuthToken(token, key);
     }
 
     public Authentication getAuthentication(AuthToken authToken) {

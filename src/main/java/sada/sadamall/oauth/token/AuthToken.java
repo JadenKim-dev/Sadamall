@@ -4,7 +4,6 @@ import io.jsonwebtoken.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.bytebuddy.pool.TypePool;
 
 import java.security.Key;
 import java.util.Date;
@@ -66,6 +65,20 @@ public class AuthToken {
             log.info("Unsupported Jwt Token.");
         } catch (IllegalArgumentException e) {
             log.info("JWT token compact of handler are invalid.");
+        }
+        return null;
+    }
+
+    public Claims getExpiredTokenClaims() {
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) {
+            log.info("Expired JWT Token");
+            return e.getClaims();
         }
         return null;
     }

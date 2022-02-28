@@ -60,6 +60,18 @@ public class AuthTokenProviderTest {
     }
 
     @Test
+    public void convertAuthTokenFrom() throws Exception {
+        //given
+        String token = "12345";
+
+        //when
+        AuthToken authToken = authTokenProvider.convertAuthTokenFrom(token);
+
+        //then
+        assertThat(authToken.getToken()).isEqualTo("12345");
+    }
+
+    @Test
     public void getAuthentication() {
         long nowTime = new Date().getTime();
         AuthToken authToken = authTokenProvider.createAuthToken(
@@ -91,5 +103,7 @@ public class AuthTokenProviderTest {
         assertThatThrownBy(() -> authTokenProvider.getAuthentication(authToken))
                 .isInstanceOf(TokenValidFailedException.class);
     }
+
+
 
 }
