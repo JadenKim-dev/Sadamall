@@ -20,7 +20,7 @@ public class AuthTokenTest {
     @BeforeEach
     public void beforeEach() {
         RandomString rs = new RandomString(38);
-        authTokenProvider = AuthTokenProvider.from(rs.nextString());
+        authTokenProvider = AuthTokenProvider.of(rs.nextString());
     }
     @Test
     public void getTokenClaims() throws Exception {

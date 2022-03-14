@@ -18,7 +18,7 @@ import java.util.List;
 public class AuthTokenProvider {
     private final Key key;
 
-    public static AuthTokenProvider from(String secret) {
+    public static AuthTokenProvider of(String secret) {
         return new AuthTokenProvider(secret);
     }
 

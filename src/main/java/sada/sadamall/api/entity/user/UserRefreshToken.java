@@ -26,7 +26,7 @@ public class UserRefreshToken {
     @Size(max = 256)
     private String refreshToken;
 
-    public static UserRefreshToken of(String oauthId, String refreshToken) {
+    public static UserRefreshToken newToken(String oauthId, String refreshToken) {
         return new UserRefreshToken(oauthId, refreshToken);
 
     }

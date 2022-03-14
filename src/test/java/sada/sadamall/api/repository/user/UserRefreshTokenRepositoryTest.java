@@ -20,7 +20,7 @@ public class UserRefreshTokenRepositoryTest {
     @Transactional
     void save() {
         // given
-        UserRefreshToken token = UserRefreshToken.of("123", "tokenA");
+        UserRefreshToken token = UserRefreshToken.newToken("123", "tokenA");
 
         // when
         UserRefreshToken savedToken = repository.save(token);
@@ -33,7 +33,7 @@ public class UserRefreshTokenRepositoryTest {
     @Transactional
     public void findByOauthId() {
         //given
-        UserRefreshToken token = UserRefreshToken.of("123", "tokenA");
+        UserRefreshToken token = UserRefreshToken.newToken("123", "tokenA");
 
         //when
         repository.save(token);
@@ -46,7 +46,7 @@ public class UserRefreshTokenRepositoryTest {
     @Transactional
     public void findByOauthIdAndRefreshToken() {
         //given
-        UserRefreshToken token = UserRefreshToken.of("123", "tokenA");
+        UserRefreshToken token = UserRefreshToken.newToken("123", "tokenA");
 
         //when
         repository.save(token);
