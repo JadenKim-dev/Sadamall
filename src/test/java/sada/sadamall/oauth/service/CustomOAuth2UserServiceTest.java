@@ -62,6 +62,7 @@ public class CustomOAuth2UserServiceTest {
         attributes.put(GoogleOAuth2UserInfo.NAME, "userA");
         attributes.put(GoogleOAuth2UserInfo.EMAIL, "aaa@gmail.com");
         attributes.put(GoogleOAuth2UserInfo.IMAGE_URL, "aaa.com");
+
         OAuth2User mockUser = mock(OAuth2User.class);
         when(mockUser.getAttributes()).thenReturn(attributes);
 
@@ -111,6 +112,7 @@ public class CustomOAuth2UserServiceTest {
     }
 
     @Test
+    @Transactional
     public void processWithProviderMissMatch() throws Exception {
         //given
         LocalDateTime now = LocalDateTime.now();
