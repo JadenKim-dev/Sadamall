@@ -8,6 +8,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static sada.sadamall.common.ApiResponse.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -18,8 +19,8 @@ public class ApiResponseTest {
         ApiResponseHeader header = apiResponse.getHeader();
         Map<String, String> body = apiResponse.getBody();
 
-        assertThat(header.getCode()).isEqualTo(ApiResponse.SUCCESS);
-        assertThat(header.getMessage()).isEqualTo(ApiResponse.SUCCESS_MESSAGE);
+        assertThat(header.getCode()).isEqualTo(SUCCESS);
+        assertThat(header.getMessage()).isEqualTo(SUCCESS_MESSAGE);
         assertThat(body).isEqualTo(Map.of("name", "user1"));
     }
 
@@ -29,8 +30,8 @@ public class ApiResponseTest {
         ApiResponseHeader header = apiResponse.getHeader();
         Map<String, String> body = apiResponse.getBody();
 
-        assertThat(header.getCode()).isEqualTo(ApiResponse.FAILED);
-        assertThat(header.getMessage()).isEqualTo(ApiResponse.FAILED_MESSAGE);
+        assertThat(header.getCode()).isEqualTo(FAILED);
+        assertThat(header.getMessage()).isEqualTo(FAILED_MESSAGE);
         assertThat(body).isEqualTo(null);
     }
 
@@ -40,8 +41,8 @@ public class ApiResponseTest {
         ApiResponseHeader header = apiResponse.getHeader();
         Map<String, String> body = apiResponse.getBody();
 
-        assertThat(header.getCode()).isEqualTo(ApiResponse.FAILED);
-        assertThat(header.getMessage()).isEqualTo(ApiResponse.INVALID_ACCESS_TOKEN_MESSAGE);
+        assertThat(header.getCode()).isEqualTo(FAILED);
+        assertThat(header.getMessage()).isEqualTo(INVALID_ACCESS_TOKEN_MESSAGE);
         assertThat(body).isEqualTo(null);
     }
 
@@ -51,8 +52,8 @@ public class ApiResponseTest {
         ApiResponseHeader header = apiResponse.getHeader();
         Map<String, String> body = apiResponse.getBody();
 
-        assertThat(header.getCode()).isEqualTo(ApiResponse.FAILED);
-        assertThat(header.getMessage()).isEqualTo(ApiResponse.INVALID_REFRESH_TOKEN_MESSAGE);
+        assertThat(header.getCode()).isEqualTo(FAILED);
+        assertThat(header.getMessage()).isEqualTo(INVALID_REFRESH_TOKEN_MESSAGE);
         assertThat(body).isEqualTo(null);
     }
 
@@ -62,8 +63,8 @@ public class ApiResponseTest {
         ApiResponseHeader header = apiResponse.getHeader();
         Map<String, String> body = apiResponse.getBody();
 
-        assertThat(header.getCode()).isEqualTo(ApiResponse.FAILED);
-        assertThat(header.getMessage()).isEqualTo(ApiResponse.NOT_EXPIRED_TOKEN_YET_MESSAGE);
+        assertThat(header.getCode()).isEqualTo(FAILED);
+        assertThat(header.getMessage()).isEqualTo(NOT_EXPIRED_TOKEN_YET_MESSAGE);
         assertThat(body).isEqualTo(null);
     }
 }
