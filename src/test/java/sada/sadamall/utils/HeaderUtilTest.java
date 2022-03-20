@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static sada.sadamall.utils.HeaderUtil.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class HeaderUtilTest {
 
     private MockHttpServletRequest request;

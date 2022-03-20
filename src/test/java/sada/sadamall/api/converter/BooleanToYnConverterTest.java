@@ -12,7 +12,6 @@ import javax.persistence.AttributeConverter;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class BooleanToYnConverterTest {
     private AttributeConverter<Boolean, String> converter;
 

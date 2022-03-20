@@ -8,8 +8,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class RoleTypeTest {
+
     @Test
     public void of() throws Exception {
         RoleType roleUser = RoleType.of("ROLE_USER");

@@ -11,8 +11,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static sada.sadamall.common.ApiResponse.*;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class ApiResponseTest {
+
     @Test
     public void success() {
         ApiResponse<String> apiResponse = ApiResponse.success("name", "user1");

@@ -13,7 +13,6 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class AuthTokenTest {
     private AuthTokenProvider authTokenProvider;
 

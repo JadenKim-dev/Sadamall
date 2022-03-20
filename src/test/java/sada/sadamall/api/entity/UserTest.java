@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class UserTest {
     private RandomString randomString;
 
