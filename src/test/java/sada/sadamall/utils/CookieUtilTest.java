@@ -1,14 +1,19 @@
 package sada.sadamall.utils;
 
+import com.nimbusds.oauth2.sdk.AuthorizationRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import sada.sadamall.api.entity.auth.AuthReqModel;
 
 import javax.servlet.http.Cookie;
+
+import java.io.Serializable;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,6 +26,7 @@ public class CookieUtilTest {
 
     @BeforeEach
     public void beforeEach() {
+
         request = new MockHttpServletRequest();
         request.setCookies(new Cookie("cookie1", "1234"));
 
@@ -64,4 +70,20 @@ public class CookieUtilTest {
         assertThat(cookie.getPath()).isEqualTo("/");
         assertThat(cookie.getMaxAge()).isEqualTo(0);
     }
+    
+    @Test
+    public void serialize() {
+        // given
+        SerializableClass origin = new SerializableClass("user", 1234);
+
+        // when
+        String serialized = CookieUtil.serialize(origin);
+
+        // then
+        Cookie cookie = new Cookie("request", serialized);
+        SerializableClass deserialized = CookieUtil.deserialize(cookie, SerializableClass.class);
+        assertThat(deserialized.getStrField()).isEqualTo(origin.getStrField());
+        assertThat(deserialized.getIntField()).isEqualTo(origin.getIntField());
+    }
+
 }
