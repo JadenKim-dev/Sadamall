@@ -1,15 +1,16 @@
 package sada.sadamall.oauth.token;
 
 import io.jsonwebtoken.Claims;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import sada.sadamall.RandomString;
+import sada.sadamall.TestConfig;
 import sada.sadamall.oauth.entity.RoleType;
 import sada.sadamall.oauth.exception.TokenValidFailedException;
 
@@ -21,41 +22,29 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
+@SpringBootTest
+@Import({TestConfig.class})
 public class AuthTokenProviderTest {
-    AuthTokenProvider authTokenProvider;
-
-    @BeforeEach
-    public void beforeEach() {
-        RandomString rs = new RandomString(38);
-        authTokenProvider = AuthTokenProvider.of(rs.nextString());
-    }
+    @Autowired AuthTokenProvider authTokenProvider;
+    @Autowired ExpiredTokenProvider expiredTokenProvider;
 
     @Test
-    public void createAuthTokenWithoutRole() {
+    public void createRefreshToken() {
         long nowTime = new Date().getTime();
-        AuthToken token = authTokenProvider.createAuthToken(
-                "1",
-                new Date(nowTime + 100000)
-        );
+        AuthToken token = authTokenProvider.createRefreshToken("1");
         Claims claims = token.getTokenClaims();
         assertThat(token).isInstanceOf(AuthToken.class);
         assertThat(claims.getSubject()).isEqualTo("1");
-        assertThat(claims.getExpiration().getTime()).isEqualTo((nowTime + 100000)/1000*1000);
     }
 
     @Test
-    public void createAuthTokenWithRole() {
+    public void createAccessToken() {
         long nowTime = new Date().getTime();
-        AuthToken token = authTokenProvider.createAuthToken(
-                "1",
-                "ROLE_USER",
-                new Date(nowTime + 100000)
-        );
+        AuthToken token = authTokenProvider.createAccessToken("1", "ROLE_USER");
         Claims claims = token.getTokenClaims();
         assertThat(token).isInstanceOf(AuthToken.class);
         assertThat(claims.getSubject()).isEqualTo("1");
         assertThat(claims.get(AuthToken.AUTHORITIES_KEY)).isEqualTo("ROLE_USER");
-        assertThat(claims.getExpiration().getTime()).isEqualTo((nowTime + 100000)/1000*1000);
     }
 
     @Test
@@ -73,11 +62,7 @@ public class AuthTokenProviderTest {
     @Test
     public void getAuthentication() {
         long nowTime = new Date().getTime();
-        AuthToken authToken = authTokenProvider.createAuthToken(
-                "1",
-                RoleType.USER.getCode(),
-                new Date(nowTime + 100000)
-        );
+        AuthToken authToken = authTokenProvider.createAccessToken("1", RoleType.USER.getCode());
         Authentication authentication = authTokenProvider.getAuthentication(authToken);
         User principal = (User) authentication.getPrincipal();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -93,16 +78,8 @@ public class AuthTokenProviderTest {
 
     @Test
     public void getAuthentication_만료된_토큰() {
-        long nowTime = new Date().getTime();
-        AuthToken authToken = authTokenProvider.createAuthToken(
-                "1",
-                RoleType.USER.getCode(),
-                new Date(nowTime - 100000)
-        );
-        assertThatThrownBy(() -> authTokenProvider.getAuthentication(authToken))
+        AuthToken expiredToken = expiredTokenProvider.createExpiredToken("1");
+        assertThatThrownBy(() -> authTokenProvider.getAuthentication(expiredToken))
                 .isInstanceOf(TokenValidFailedException.class);
     }
-
-
-
 }

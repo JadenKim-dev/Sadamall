@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
+import sada.sadamall.config.properties.AppProperties;
 import sada.sadamall.oauth.exception.TokenValidFailedException;
 
 import java.security.Key;
@@ -17,20 +18,22 @@ import java.util.List;
 @Slf4j
 public class AuthTokenProvider {
     private final Key key;
+    private final AppProperties appProperties;
 
-    public static AuthTokenProvider of(String secret) {
-        return new AuthTokenProvider(secret);
-    }
-
-    private AuthTokenProvider(String secret) {
+    public AuthTokenProvider(String secret, AppProperties appProperties) {
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.appProperties = appProperties;
     }
 
-    public AuthToken createAuthToken(String id, Date expiry) {
+    public AuthToken createRefreshToken(String id) {
+        Date now = new Date();
+        Date expiry = new Date(now.getTime() + appProperties.getAuth().getRefreshTokenExpiry());
         return new AuthToken(id, expiry, key);
     }
 
-    public AuthToken createAuthToken(String id, String role, Date expiry) {
+    public AuthToken createAccessToken(String id, String role) {
+        Date now = new Date();
+        Date expiry = new Date(now.getTime() + appProperties.getAuth().getTokenExpiry());
         return new AuthToken(id, role, expiry, key);
     }
 
